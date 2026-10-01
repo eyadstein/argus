@@ -1,5 +1,55 @@
 # Argus: A Vision-Based Reinforcement Learning Agent for Atari Breakout
 
+## Appendix
+
+### A.1 Hyperparameters
+
+| Parameter | Value |
+|---|---|
+| Environment | ALE/Breakout-v5 |
+| Episodes | 2000 |
+| Batch size | 32 |
+| Discount factor (gamma) | 0.99 |
+| Learning rate | 1e-4 |
+| Replay buffer capacity | 100,000 |
+| Min buffer size before training | 5,000 |
+| Target network update frequency | every 1,000 steps |
+| Epsilon start / end | 1.0 / 0.05 |
+| Epsilon decay steps | 200,000 |
+| Optimizer | Adam |
+| Loss function | Smooth L1 (Huber) |
+| Gradient clip norm | 10.0 |
+
+### A.2 Repository Structure
+
+argus/
++-- notebooks/
+| +-- 01_explore_env.ipynb - environment/pipeline exploration and verification
++-- src/
+| +-- preprocess.py - grayscale + frame-stacking preprocessing
+| +-- model.py - CNN Q-network architecture
+| +-- agent.py - replay buffer, Double DQN / vanilla DQN agent
+| +-- train.py - training loop (--mode double|vanilla)
+| +-- evaluate.py - statistical evaluation over N episodes
+| +-- record_gameplay.py - records .mp4 gameplay footage from a checkpoint
+| +-- plot_results.py - plots reward/epsilon curves from training logs
++-- checkpoints/ - saved model weights and training logs
++-- videos/ - recorded gameplay footage
+
+### A.3 Referenced Media
+
+- checkpoints/reward_curve.png - full training reward and epsilon curve
+- videos/early_ep100_episode-{0,1,2}.mp4 - gameplay at episode 100
+- videos/trained_ep2000_episode-{0,1,2}.mp4 - gameplay at episode 2000
+
+### A.4 References
+
+- Mnih, V., et al. (2015). Human-level control through deep reinforcement
+  learning. Nature, 518(7540), 529-533.
+- van Hasselt, H., Guez, A., & Silver, D. (2016). Deep reinforcement
+  learning with double Q-learning. Proceedings of the AAAI Conference on
+  Artificial Intelligence, 30(1).
+  
 ## 1. Introduction
 
 Reinforcement learning agents that operate directly on raw sensory input,
@@ -258,55 +308,6 @@ overestimation behavior Double DQN is designed to address - a comparison
 this report identifies as incomplete and flags as a direction for
 follow-up work.
 
-## Appendix
-
-### A.1 Hyperparameters
-
-| Parameter | Value |
-|---|---|
-| Environment | ALE/Breakout-v5 |
-| Episodes | 2000 |
-| Batch size | 32 |
-| Discount factor (gamma) | 0.99 |
-| Learning rate | 1e-4 |
-| Replay buffer capacity | 100,000 |
-| Min buffer size before training | 5,000 |
-| Target network update frequency | every 1,000 steps |
-| Epsilon start / end | 1.0 / 0.05 |
-| Epsilon decay steps | 200,000 |
-| Optimizer | Adam |
-| Loss function | Smooth L1 (Huber) |
-| Gradient clip norm | 10.0 |
-
-### A.2 Repository Structure
-
-argus/
-+-- notebooks/
-| +-- 01_explore_env.ipynb - environment/pipeline exploration and verification
-+-- src/
-| +-- preprocess.py - grayscale + frame-stacking preprocessing
-| +-- model.py - CNN Q-network architecture
-| +-- agent.py - replay buffer, Double DQN / vanilla DQN agent
-| +-- train.py - training loop (--mode double|vanilla)
-| +-- evaluate.py - statistical evaluation over N episodes
-| +-- record_gameplay.py - records .mp4 gameplay footage from a checkpoint
-| +-- plot_results.py - plots reward/epsilon curves from training logs
-+-- checkpoints/ - saved model weights and training logs
-+-- videos/ - recorded gameplay footage
-
-### A.3 Referenced Media
-
-- checkpoints/reward_curve.png - full training reward and epsilon curve
-- videos/early_ep100_episode-{0,1,2}.mp4 - gameplay at episode 100
-- videos/trained_ep2000_episode-{0,1,2}.mp4 - gameplay at episode 2000
-
-### A.4 References
-
-- Mnih, V., et al. (2015). Human-level control through deep reinforcement
-  learning. Nature, 518(7540), 529-533.
-- van Hasselt, H., Guez, A., & Silver, D. (2016). Deep reinforcement
-  learning with double Q-learning. Proceedings of the AAAI Conference on
-  Artificial Intelligence, 30(1).
 ## 9. Generalization to a Second Game
 
 To test whether the implemented pipeline generalizes beyond Breakout, or
