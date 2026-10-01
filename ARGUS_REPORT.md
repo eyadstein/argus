@@ -373,30 +373,6 @@ wider and more diverse set of environments (e.g., navigation-based games,
 games with sparser rewards) would be needed to support a broader
 generalization claim.
 
-
-## 5.3 Update: Vanilla DQN vs. Double DQN comparison (revised with figure)
-
-A direct visual comparison (see checkpoints/vanilla_vs_double_comparison.png)
-shows that, on this task and training budget, vanilla DQN's smoothed reward
-curve was comparable to, and at some points slightly higher than, Double
-DQN's - reward alone does not clearly favor either variant here.
-
-The more diagnostic result is the mean Q-value trajectory: vanilla DQN's
-Q-values rose steadily and had not plateaued by episode 2000, still
-climbing at the end of training. This monotonic, unbounded growth pattern
-is consistent with the overestimation bias described by van Hasselt et
-al. (2016), even though a directly matched Double DQN Q-value curve was
-not available for this run (see the original Section 5.3 limitation
-note).
-
-The corrected interpretation is therefore: reward performance was not
-clearly distinguishable between the two variants at this training scale,
-but vanilla DQN exhibits the expected qualitative signature of Q-value
-overestimation, while whether Double DQN suppresses this to a measurably
-different degree remains unconfirmed without a matched comparison. This
-is a more accurate and defensible claim than asserting Double DQN
-improved performance, which the reward data does not support.
-
 ## 10. A Third, Harder Game: Seaquest
 
 To further test generalization and probe the limits of the 2000-episode
