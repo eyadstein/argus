@@ -1,0 +1,5 @@
+venv/
+__pycache__/
+*.pyc
+*.mp4
+checkpoints/*/*/dqn_ep*.pt
